@@ -1,7 +1,6 @@
-import React, {useState, useEffect, useContext, useCallback} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import axios from 'axios';
 import APIContext from "../context/APIContext";
-import TokenContext from "../context/TokenContext";
 
 
 interface Service {
@@ -13,7 +12,6 @@ interface Service {
 
 const AddService = () => {
     const url = useContext(APIContext)
-    const token = useContext(TokenContext);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [providers, setProviders] = useState('');
@@ -48,7 +46,7 @@ const AddService = () => {
                     providers: providersArray
                 };
             }
-            let response = await axios.post(`${url}/service`, data, {headers: {Authorization: `Bearer ${token}`}});
+            let response = await axios.post(`${url}/service`, data, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
             console.log(response.data);
             alert('Service added successfully');
             setName('');
@@ -58,27 +56,29 @@ const AddService = () => {
             console.error(error);
             alert(`Error adding service: ${error}`);
         }
-    }, [description, name, token, providers, url]);
+    }, [description, name, providers, url]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${url}/service`, {headers: {Authorization: `Bearer ${token}`}});
+                const response = await axios.get(`${url}/service`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
                 setServices(response.data);
-            } catch (error) {
-                console.error(error);
+            } catch (error: any) {
+                console.error(error.response.data);
+                alert(JSON.stringify(error.response.data))
             }
         };
         fetchData().then(() => {});
-    },[handleSubmit, token, url]);
+    },[handleSubmit, url]);
 
     const handleDelete = async (id: string) => {
         try {
-            await axios.delete(`${url}/service/${id}`, {headers: {Authorization: `Bearer ${token}`}});
+            await axios.delete(`${url}/service/${id}`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
             const updatedServices = services.filter(service => service._id !== id);
             setServices(updatedServices);
-        } catch (error) {
-            console.error(error);
+        } catch (error: any) {
+            console.error(error.response.data);
+            alert(JSON.stringify(error.response.data))
         }
     };
 

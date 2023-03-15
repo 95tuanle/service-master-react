@@ -1,7 +1,6 @@
-import {useState, useEffect, useContext} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import axios from 'axios';
 import APIContext from "../context/APIContext";
-import TokenContext from "../context/TokenContext";
 
 interface Service {
     _id: string;
@@ -13,36 +12,38 @@ interface Service {
 function ListServices() {
     const [services, setServices] = useState<Service[]>([]);
     const url = useContext(APIContext);
-    const token = useContext(TokenContext);
+    // const token = ;
 
     useEffect(() => {
-        if (token) {
+        // if (token) {
             const fetchData = async () => {
                 try {
                     const response = await axios.get(url + '/service', {
-                        headers: {Authorization: `Bearer ${token}`}});
+                        headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
                     setServices(response.data);
                     console.log(response.data);
-                } catch (error) {
-                    console.error(error);
+                } catch (error: any) {
+                    console.error(error.response.data);
+                    alert(JSON.stringify(error.response.data))
                 }
             };
             fetchData().then(() => {});
-        }
-    }, [token, url]);
+        // }
+    }, [url]);
 
     const handleDelete = async (id: string) => {
-        if (token) {
+        // if (token) {
             try {
                 await axios.delete(`${url}/service/${id}`, {
-                    headers: { Authorization: `Bearer ${token}` }
+                    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
                 });
                 const updatedServices = services.filter(service => service._id !== id);
                 setServices(updatedServices);
-            } catch (error) {
-                console.error(error);
+            } catch (error: any) {
+                console.error(error.response.data);
+                alert(JSON.stringify(error.response.data))
             }
-        }
+        // }
     };
 
     return (

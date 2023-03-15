@@ -1,7 +1,6 @@
 import {useParams} from "react-router-dom";
 import {useContext, useState} from "react";
 import APIContext from "../context/APIContext";
-import TokenContext from "../context/TokenContext";
 import axios from "axios";
 
 
@@ -12,7 +11,6 @@ interface Props {
 
 const UpdateUser = ({users, setUsers}: Props) => {
     const url = useContext(APIContext);
-    const token = useContext(TokenContext);
     const _id = useParams()._id;
     const user = users.filter((user: any) => user._id === _id)[0];
 
@@ -42,18 +40,18 @@ const UpdateUser = ({users, setUsers}: Props) => {
                     'email': inputs.email,
                     'password': inputs.password,
                     'type': inputs.type
-                },{headers: {Authorization: `Bearer ${token}`}});
+                },{headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
                 alert('Updated')
                 console.log(response.data);
-                axios.get(url + '/user', {headers: {Authorization: `Bearer ${token}`}}).then(response => {
+                axios.get(url + '/user', {headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}}).then(response => {
                     setUsers(response.data);
                     console.log(response.data);
                 }).catch(error => {
                     alert(error);
                     console.error(error);})
-            } catch (error) {
-                alert(error)
-                console.error(error);
+            } catch (error: any) {
+                console.error(error.response.data);
+                alert(JSON.stringify(error.response.data))
             }
         }
     }

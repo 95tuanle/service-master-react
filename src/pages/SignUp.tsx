@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import React, {useContext, useState} from "react";
 import axios from 'axios';
 import APIContext from "../context/APIContext";
 import ServiceMasterLogo from '../assets/images/service-master-logo.png';
@@ -8,16 +8,15 @@ import {AdminString, CustomerString, ProviderString} from "../Utilities";
 const SignUp = () => {
     const url = useContext(APIContext);
     const navigate = useNavigate();
+    const userTypes = [AdminString, CustomerString, ProviderString];
 
     const [inputs, setInputs] = useState({
         firstName: "",
         lastName: "",
         email: "",
         password: "",
-        type: "ADMIN",
+        type: "",
     });
-
-    const userTypes = [AdminString, CustomerString, ProviderString];
 
     const handleChange = (event: any) => {
         const name = event.target.name;
@@ -116,6 +115,7 @@ const SignUp = () => {
                                                 className={`form-control input-field-dd`}
                                                 id="type-field"
                                                 onChange={handleChange} >
+                                                <option value="" className='option-disabled'>Select</option>
                                                 {userTypes.map((options, index) => {
                                                     return (
                                                         <option value={options} key={index}>{options}</option>

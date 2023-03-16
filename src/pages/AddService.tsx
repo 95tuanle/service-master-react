@@ -2,8 +2,7 @@ import React, {useCallback, useContext, useEffect, useState} from 'react';
 import axios from 'axios';
 import APIContext from "../context/APIContext";
 
-
-interface Service {
+export interface Service {
     _id: string;
     name: string;
     description: string;

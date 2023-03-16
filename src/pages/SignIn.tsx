@@ -31,6 +31,7 @@ const SignIn = () => {
                 });
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("user_type", response.data.user_type);
+                localStorage.setItem("user_name", response.data.user_name);
                 console.log(response.data);
                 alert('Signed In');
                 navigate('/');

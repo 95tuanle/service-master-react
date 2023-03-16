@@ -7,6 +7,8 @@ import {Route, Routes} from "react-router-dom";
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
+import Book from './pages/Book';
+import Bookings from './pages/Bookings';
 import APIContext from "./context/APIContext";
 import Footer from './pages/Footer';
 import SignedInRoute from "./components/authentication/SignedInRoute";
@@ -16,7 +18,7 @@ import CustomerRoute from "./components/authorization/CustomerRoute";
 import ProviderRoute from "./components/authorization/ProviderRoute";
 import AddService from "./pages/AddService";
 import UpdateUser from "./pages/UpdateUser";
-import ListServices from "./pages/ListServices";
+import Services from "./pages/Services";
 import Users from "./pages/Users";
 
 
@@ -31,25 +33,12 @@ export interface UserType {
 
 function App() {
     const [users, setUsers] = useState<UserType[]>([]);
-    // const [user, setUser] = useState<UserType | null>(null);
     const url = useContext(APIContext);
-    // useEffect(() => {
-    //     if (user == null && localStorage.getItem("token")) {
-    //         axios.get(url + '/user/current', {
-    //             headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}
-    //         }).then(response => {
-    //             setUser(response.data);
-    //             console.log(response.data);
-    //         }).catch(error => {
-    //             console.error(error.response.data);
-    //             alert(JSON.stringify(error.response.data))})
-    //     }
-    // })
 
     return (
-        <>
-            <APIContext.Provider value={url}>
-                <Navigation/>
+        <APIContext.Provider value={url}>
+            <Navigation/>
+            <div className='container'>
                 <Routes>
                     <Route path='/' element={<Home/>}/>
                     <Route element={<SignedOutRoute/>}>
@@ -58,13 +47,15 @@ function App() {
                     </Route>
                     <Route element={<SignedInRoute/>}>
                         <Route element={<AdminRoute/>}>
-                            <Route path='users' element={<Users setUsers={setUsers} users={users}/>} />
-                            <Route path='update/:_id' element={<UpdateUser setUsers={setUsers} users={users}/>} />
-                            <Route path='add-service' element={<AddService/>}/>
-                            <Route path='list-services' element={<ListServices/>} />
+                            <Route path='admin/users' element={<Users setUsers={setUsers} users={users}/>} />
+                            <Route path='admin/update-user/:_id' element={<UpdateUser setUsers={setUsers} users={users}/>} />
+                            <Route path='admin/add-service' element={<AddService/>}/>
+                            <Route path='admin/services' element={<Services/>} />
                         </Route>
                         <Route element={<CustomerRoute/>}>
-
+                            <Route path='customer/services' element={<Services/>} />
+                            <Route path='customer/bookings' element={<Bookings/>} />
+                            <Route path='customer/book' element={<Book />} />
                         </Route>
                         <Route element={<ProviderRoute/>}>
 
@@ -72,9 +63,9 @@ function App() {
                     </Route>
                     <Route path='*' element={<h1>Oops! Route not found</h1>}/>
                 </Routes>
-                <Footer/>
-            </APIContext.Provider>
-        </>
+            </div>
+            <Footer/>
+        </APIContext.Provider>
     );
 }
 

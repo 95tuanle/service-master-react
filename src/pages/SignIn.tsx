@@ -4,7 +4,11 @@ import axios from "axios";
 import ServiceMasterLogo from '../assets/images/service-master-logo.png';
 import {useNavigate} from "react-router-dom";
 
-const SignIn = () => {
+interface Props {
+    setUser: (user: any) => void
+}
+
+const SignIn = ({setUser}: Props) => {
     const url = useContext(APIContext);
     const navigate = useNavigate();
 
@@ -26,13 +30,16 @@ const SignIn = () => {
             alert("input must not be empty")
         } else {
             try {
-                const response = await axios.post(url+'/token', {
+                const tokenResponse = await axios.post(url+'/authentication', {
                     'email': inputs.email,
                     'password': inputs.password,
                 });
-                console.log(response.data);
-                localStorage.setItem("token", response.data);
-                alert('Signed In')
+                localStorage.setItem("token", tokenResponse.data);
+                console.log(tokenResponse.data);
+                const userResponse = await axios.get(`${url}/user/current-user`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
+                setUser(userResponse.data);
+                console.log(userResponse.data)
+                alert('Signed In');
                 navigate('/');
             } catch (error: any) {
                 console.error(error.response.data);

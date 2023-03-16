@@ -3,6 +3,7 @@ import axios from 'axios';
 import APIContext from "../context/APIContext";
 import ServiceMasterLogo from '../assets/images/service-master-logo.png';
 import {useNavigate} from "react-router-dom";
+import {AdminString, CustomerString, ProviderString} from "../Utilities";
 
 const SignUp = () => {
     const url = useContext(APIContext);
@@ -16,7 +17,7 @@ const SignUp = () => {
         type: "ADMIN",
     });
 
-    const userTypes = ["ADMIN", "CUSTOMER", "PROVIDER"];
+    const userTypes = [AdminString, CustomerString, ProviderString];
 
     const handleChange = (event: any) => {
         const name = event.target.name;
@@ -39,7 +40,7 @@ const SignUp = () => {
                 });
                 console.log(response.data);
                 alert('Signed Up')
-                navigate('/sign-in');
+                navigate('sign-in');
             } catch (error: any) {
                 console.error(error);
                 alert(JSON.stringify(error.response.data))
@@ -115,7 +116,6 @@ const SignUp = () => {
                                                 className={`form-control input-field-dd`}
                                                 id="type-field"
                                                 onChange={handleChange} >
-                                                {/*<option value="" className='option-disabled'>Select</option>*/}
                                                 {userTypes.map((options, index) => {
                                                     return (
                                                         <option value={options} key={index}>{options}</option>

@@ -5,7 +5,7 @@ import User from "../components/User";
 
 interface Props {
     users: any[];
-    setUsers: (data: any) => void
+    setUsers: (users: any) => void
 }
 
 const Users = ({users, setUsers}: Props) => {

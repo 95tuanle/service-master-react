@@ -1,13 +1,20 @@
 import {NavLink} from "react-router-dom";
 
 import ServiceMasterLogo from '../assets/images/service-master-logo.png';
+import UserContext from "../context/UserContext";
+import {useContext} from "react";
+import {CustomerString} from "../Utilities";
 
-const Navigation = () => {
-
-    function removeItem() {
+interface Props {
+    setUser: (user: any) => void
+}
+const Navigation = ({setUser}: Props) => {
+    const user = useContext(UserContext);
+    const signOut = () => {
         localStorage.removeItem("token")
+        setUser(null);
+    };
 
-    }
     return (
         <header className='mb-5'>
             <nav className="navbar navbar-expand-lg navbar-dark header-bg scrolling-navbar py-2">
@@ -21,22 +28,27 @@ const Navigation = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto fw-bold">
                         {localStorage.getItem("token") ? (
-                            <li>
-                                <li className="nav-item active mr-sm-3">
-                                    <div className="nav-link text-dark" onClick={removeItem}>Sign Out</div>
-                                    {/*<NavLink className="nav-link text-dark" to='/sign-up'>Sign Out</NavLink>*/}
-                                </li>
-                            </li>
-                        ) : (
+                            (user?.type === CustomerString) && (
+                                <>
+                                    <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/' onClick={signOut}>Sign Out</NavLink></li>
+                                </>
+                            )
+
+                            // <>
+                            //
+                            //     {/*<li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/users'>Users</NavLink></li>*/}
+                            //     {/*<li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/add-service'>Add Service</NavLink></li>*/}
+                            //     {/*<li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/list-services'>Services</NavLink></li>*/}
+                            //     <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/' onClick={signOut}>Sign Out</NavLink></li>
+                            // </>
+
+                            ) : (
                             <>
                                 <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/sign-up'>Sign Up</NavLink></li>
                                 <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/sign-in'>Sign In</NavLink></li>
                             </>
                         )}
 
-                        <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/users'>Users</NavLink></li>
-                        <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/add-service'>Add Service</NavLink></li>
-                        <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/list-services'>Services</NavLink></li>
                     </ul>
                 </div>
             </nav>

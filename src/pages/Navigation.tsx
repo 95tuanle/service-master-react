@@ -7,8 +7,7 @@ const Navigation = () => {
     const navigate = useNavigate();
 
     const signOut = () => {
-        localStorage.removeItem("token")
-        localStorage.removeItem("user_type")
+        localStorage.clear()
         navigate("/");
     };
 

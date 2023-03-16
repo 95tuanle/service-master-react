@@ -128,8 +128,6 @@ const SignUp = () => {
                                           onClick={handleSubmit}>Sign up</span>
                                 </div>
                             </div>
-
-
                             <div className='row text-center'>
                                 <div className='col-12'>
                                     <p className='generic-paragraph mb-4'>Already have an account? <a href='/sign-in'>Sign in</a></p>

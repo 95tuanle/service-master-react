@@ -1,18 +1,15 @@
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
 import ServiceMasterLogo from '../assets/images/service-master-logo.png';
-import UserContext from "../context/UserContext";
-import {useContext} from "react";
 import {AdminString, CustomerString, ProviderString} from "../Utilities";
 
-interface Props {
-    setUser: (user: any) => void
-}
-const Navigation = ({setUser}: Props) => {
-    const user = useContext(UserContext);
+const Navigation = () => {
+    const navigate = useNavigate();
+
     const signOut = () => {
         localStorage.removeItem("token")
-        setUser(null);
+        localStorage.removeItem("user_type")
+        navigate("/");
     };
 
     return (
@@ -29,15 +26,15 @@ const Navigation = ({setUser}: Props) => {
                     <ul className="navbar-nav mr-auto fw-bold">
                         {localStorage.getItem("token") ? (
                             <>
-                                {user?.type === AdminString && (<>
-                                    {/*<li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/users'>Users</NavLink></li>*/}
-                                    {/*<li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/add-service'>Add Service</NavLink></li>*/}
-                                    {/*<li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/list-services'>Services</NavLink></li>*/}
+                                {localStorage.getItem("user_type") === AdminString && (<>
+                                    <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/users'>Users</NavLink></li>
+                                    <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/add-service'>Add Service</NavLink></li>
+                                    <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/list-services'>Services</NavLink></li>
                                 </>)}
-                                {user?.type === CustomerString && (<>
+                                {localStorage.getItem("user_type") === CustomerString && (<>
 
                                 </>)}
-                                {user?.type === ProviderString && (<>
+                                {localStorage.getItem("user_type") === ProviderString && (<>
 
                                 </>)}
                                 <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/' onClick={signOut}>Sign Out</NavLink></li>

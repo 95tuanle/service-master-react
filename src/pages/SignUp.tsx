@@ -42,7 +42,7 @@ const SignUp = () => {
                 alert('Signed Up')
                 navigate('/sign-in');
             } catch (error: any) {
-                console.error(error);
+                console.error(error.response.data);
                 alert(JSON.stringify(error.response.data))
             }
         }

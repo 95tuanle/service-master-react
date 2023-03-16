@@ -47,8 +47,8 @@ const UpdateUser = ({users, setUsers}: Props) => {
                     setUsers(response.data);
                     console.log(response.data);
                 }).catch(error => {
-                    alert(error);
-                    console.error(error);})
+                    console.error(error.response.data);
+                    alert(JSON.stringify(error.response.data));})
             } catch (error: any) {
                 console.error(error.response.data);
                 alert(JSON.stringify(error.response.data))

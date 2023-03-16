@@ -4,14 +4,9 @@ import axios from "axios";
 import ServiceMasterLogo from '../assets/images/service-master-logo.png';
 import {useNavigate} from "react-router-dom";
 
-interface Props {
-    setUser: (user: any) => void
-}
-
-const SignIn = ({setUser}: Props) => {
+const SignIn = () => {
     const url = useContext(APIContext);
     const navigate = useNavigate();
-
 
     const [inputs, setInputs] = useState({
         email: "",
@@ -35,7 +30,7 @@ const SignIn = ({setUser}: Props) => {
                     'password': inputs.password,
                 });
                 localStorage.setItem("token", response.data.token);
-                setUser(response.data.user);
+                localStorage.setItem("user_type", response.data.user_type);
                 console.log(response.data);
                 alert('Signed In');
                 navigate('/');

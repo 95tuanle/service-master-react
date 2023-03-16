@@ -1,10 +1,8 @@
 import {Navigate, Outlet} from 'react-router-dom';
-import {useContext} from "react";
-import UserContext from "../context/UserContext";
+import {ProviderString} from "../../Utilities";
 
 const ProviderRoute = () => {
-    const user = useContext(UserContext);
-    if (user?.type !== ProviderRoute) {
+    if (localStorage.getItem("user_type") !== ProviderString) {
         return <Navigate to='/' replace/>;
     }
     return <Outlet />;

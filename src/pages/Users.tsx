@@ -12,14 +12,12 @@ const Users = ({users, setUsers}: Props) => {
     const url = useContext(APIContext);
 
     useEffect(() => {
-        // if (token) {
-            axios.get(`${url}/user`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}}).then(response => {
-                setUsers(response.data);
-                console.log(response.data);
-            }).catch(error => {
-                alert(error);
-                console.error(error);})
-        // }
+        axios.get(`${url}/user`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}}).then(response => {
+            setUsers(response.data);
+            console.log(response.data);
+        }).catch(error => {
+            console.error(error.response.data);
+            alert(JSON.stringify(error.response.data))})
     }, [url, setUsers]);
 
     return (

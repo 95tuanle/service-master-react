@@ -12,38 +12,33 @@ interface Service {
 function ListServices() {
     const [services, setServices] = useState<Service[]>([]);
     const url = useContext(APIContext);
-    // const token = ;
 
     useEffect(() => {
-        // if (token) {
-            const fetchData = async () => {
-                try {
-                    const response = await axios.get(url + '/service', {
-                        headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
-                    setServices(response.data);
-                    console.log(response.data);
-                } catch (error: any) {
-                    console.error(error.response.data);
-                    alert(JSON.stringify(error.response.data))
-                }
-            };
-            fetchData().then(() => {});
-        // }
-    }, [url]);
-
-    const handleDelete = async (id: string) => {
-        // if (token) {
+        const fetchData = async () => {
             try {
-                await axios.delete(`${url}/service/${id}`, {
-                    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
-                });
-                const updatedServices = services.filter(service => service._id !== id);
-                setServices(updatedServices);
+                const response = await axios.get(url + '/service', {
+                    headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
+                setServices(response.data);
+                console.log(response.data);
             } catch (error: any) {
                 console.error(error.response.data);
                 alert(JSON.stringify(error.response.data))
             }
-        // }
+        };
+        fetchData().then(() => {});
+    }, [url]);
+
+    const handleDelete = async (id: string) => {
+        try {
+            await axios.delete(`${url}/service/${id}`, {
+                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+            });
+            const updatedServices = services.filter(service => service._id !== id);
+            setServices(updatedServices);
+        } catch (error: any) {
+            console.error(error.response.data);
+            alert(JSON.stringify(error.response.data))
+        }
     };
 
     return (

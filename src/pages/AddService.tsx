@@ -54,8 +54,8 @@ const AddService = () => {
             setDescription('');
             setProviders('');
         } catch (error: any) {
-            console.error(error);
-            alert(`Error adding service: ${error}`);
+            console.error(error.response.data);
+            alert(JSON.stringify(error.response.data));
         }
     }, [description, name, providers, url]);
 

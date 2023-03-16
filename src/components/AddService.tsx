@@ -11,6 +11,7 @@ interface Service {
 }
 
 const AddService = () => {
+    console.log("???")
     const url = useContext(APIContext)
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');

@@ -30,15 +30,13 @@ const SignIn = ({setUser}: Props) => {
             alert("input must not be empty")
         } else {
             try {
-                const tokenResponse = await axios.post(url+'/authentication', {
+                const response = await axios.post(url+'/authentication', {
                     'email': inputs.email,
                     'password': inputs.password,
                 });
-                localStorage.setItem("token", tokenResponse.data);
-                console.log(tokenResponse.data);
-                const userResponse = await axios.get(`${url}/user/current-user`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
-                setUser(userResponse.data);
-                console.log(userResponse.data)
+                localStorage.setItem("token", response.data.token);
+                setUser(response.data.user);
+                console.log(response.data);
                 alert('Signed In');
                 navigate('/');
             } catch (error: any) {

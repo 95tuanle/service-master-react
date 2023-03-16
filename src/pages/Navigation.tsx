@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import ServiceMasterLogo from '../assets/images/service-master-logo.png';
 import UserContext from "../context/UserContext";
 import {useContext} from "react";
-import {CustomerString} from "../Utilities";
+import {AdminString, CustomerString, ProviderString} from "../Utilities";
 
 interface Props {
     setUser: (user: any) => void
@@ -28,20 +28,20 @@ const Navigation = ({setUser}: Props) => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto fw-bold">
                         {localStorage.getItem("token") ? (
-                            (user?.type === CustomerString) && (
-                                <>
-                                    <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/' onClick={signOut}>Sign Out</NavLink></li>
-                                </>
-                            )
+                            <>
+                                {user?.type === AdminString && (<>
+                                    {/*<li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/users'>Users</NavLink></li>*/}
+                                    {/*<li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/add-service'>Add Service</NavLink></li>*/}
+                                    {/*<li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/list-services'>Services</NavLink></li>*/}
+                                </>)}
+                                {user?.type === CustomerString && (<>
 
-                            // <>
-                            //
-                            //     {/*<li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/users'>Users</NavLink></li>*/}
-                            //     {/*<li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/add-service'>Add Service</NavLink></li>*/}
-                            //     {/*<li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/list-services'>Services</NavLink></li>*/}
-                            //     <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/' onClick={signOut}>Sign Out</NavLink></li>
-                            // </>
+                                </>)}
+                                {user?.type === ProviderString && (<>
 
+                                </>)}
+                                <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/' onClick={signOut}>Sign Out</NavLink></li>
+                            </>
                             ) : (
                             <>
                                 <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/sign-up'>Sign Up</NavLink></li>

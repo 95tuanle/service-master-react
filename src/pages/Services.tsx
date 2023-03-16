@@ -5,10 +5,15 @@ import {AdminString, CustomerString} from "../Utilities";
 import {useNavigate} from "react-router-dom";
 
 interface Service {
-    _id: string;
-    name: string;
-    description: string;
-    providers: string[];
+    service: {
+        _id: string;
+        name: string;
+        description: string;
+        providers: string[];
+    }, providers: [{
+        _id: string
+        name: string
+    }]
 }
 
 const Services = () => {
@@ -38,7 +43,7 @@ const Services = () => {
             await axios.delete(`${url}/service/${id}`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
             });
-            const updatedServices = services.filter(service => service._id !== id);
+            const updatedServices = services.filter(service => service.service._id !== id);
             setServices(updatedServices);
         } catch (error: any) {
             console.error(error.response.data);
@@ -46,7 +51,7 @@ const Services = () => {
         }
     };
     const handleBookNow = (service: Service): void => {
-        navigate(`/customer/book?_id=${service._id}`);
+        navigate(`/customer/book`, {state: {service: service}});
     }
 
     return (
@@ -59,17 +64,17 @@ const Services = () => {
                 </div>
             ) : (
                 services.map((service) => (
-                    <div key={service._id} className="card mb-4">
+                    <div key={service.service._id} className="card mb-4">
                         <div className="card-header bg-dark text-white">
-                            {service.name}
+                            {service.service.name}
                         </div>
                         <div className="card-body">
-                            <p className="card-text mb-3">{service.description}</p>
+                            <p className="card-text mb-3">{service.service.description}</p>
                             {localStorage.getItem("user_type") === CustomerString && (
                                 <span className="btn btn-primary btn-service-master-bg text-dark" onClick={() => handleBookNow(service)}>Book now</span>
                             )}
                             {localStorage.getItem("user_type") === AdminString && (
-                                <span className="btn btn-primary btn-service-master-bg text-dark" onClick={() => handleDelete(service._id)}>Delete</span>
+                                <span className="btn btn-primary btn-service-master-bg text-dark" onClick={() => handleDelete(service.service._id)}>Delete</span>
                             )}
                         </div>
                     </div>

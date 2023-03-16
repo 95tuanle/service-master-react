@@ -1,9 +1,7 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 import APIContext from "../context/APIContext";
-import {Service} from "./AddService";
-
 
 interface Provider {
     _id: string,
@@ -12,49 +10,10 @@ interface Provider {
 
 const Book = () => {
     const navigate = useNavigate();
-    const location = useLocation();
+    const {state} = useLocation();
+    const {service} = state;
     const url = useContext(APIContext);
     const urgencyOptions = ["ASAP", "Anytime", "1 week"];
-    const _id = new URLSearchParams(location.search).get('_id');
-    const [service, setService] = useState<Service>()
-    const [providers, setProviders] = useState<Provider[]>([])
-
-    useEffect( () => {
-        const fetchService = async () => {
-            try {
-                let response = await axios.get(`${url}/service/${_id}`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
-                setService(response.data);
-                console.log(response.data)
-            } catch (error: any) {
-                console.error(error.response.data);
-                alert(JSON.stringify(error.response.data))
-            }
-        }
-        fetchService().then(() => {});
-    }, [_id, url])
-
-    const handleAddProvider = (_id: string, name: string) => {
-        setProviders((prevState) => [
-            ...prevState,
-            { name: name, _id: _id},
-        ]);
-    }
-
-    useEffect(() => {
-        const fetchProviders = async () => {
-            try {
-                service?.providers.map(async provider => {
-                    const response = await axios.get(`${url}/user/name/${provider}`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
-                    handleAddProvider(provider, response.data);
-                    console.log(response.data)
-                })
-            } catch (error: any) {
-                console.error(error.response.data);
-                alert(JSON.stringify(error.response.data))
-            }
-        }
-        fetchProviders().then(() => {});
-    }, [service?.providers, url])
 
 
     const [inputs, setInputs] = useState({
@@ -84,7 +43,7 @@ const Book = () => {
                     booking_address: inputs.booking_address,
                     booking_date: inputs.booking_date,
                     provider: inputs.provider,
-                    service: _id
+                    service: service._id
                 }, {headers: { Authorization: `Bearer ${localStorage.getItem("token")}`}});
                 console.log(response.data);
                 alert('Booked')
@@ -161,9 +120,9 @@ const Book = () => {
                                                 id="provider-field"
                                                 onChange={handleChange} >
                                                 <option value="" className='option-disabled'>Select</option>
-                                                {providers?.map((provider, index) => {
+                                                {service.providers.map((provider:Provider) => {
                                                     return (
-                                                        <option value={provider._id} key={index}>{provider.name}</option>
+                                                        <option value={provider._id} key={provider._id}>{provider.name}</option>
                                                     )})
                                                 }
                                             </select>

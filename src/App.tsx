@@ -19,6 +19,7 @@ import ProviderRoute from "./components/authorization/ProviderRoute";
 import AddService from "./pages/AddService";
 import UpdateUser from "./pages/UpdateUser";
 import Services from "./pages/Services";
+import RegisteredServices from "./pages/RegisteredServices";
 import Users from "./pages/Users";
 
 
@@ -58,7 +59,9 @@ function App() {
                             <Route path='customer/book' element={<Book />} />
                         </Route>
                         <Route element={<ProviderRoute/>}>
-
+                            <Route path='provider/services' element={<Services/>} />
+                            <Route path='provider/registered-services' element={<RegisteredServices/>} />
+                            <Route path='provider/bookings' element={<Bookings/>} />
                         </Route>
                     </Route>
                     <Route path='*' element={<h1>Oops! Route not found</h1>}/>

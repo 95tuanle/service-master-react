@@ -35,7 +35,9 @@ const Navigation = () => {
                                     <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/customer/bookings'>Bookings</NavLink></li>
                                 </>)}
                                 {localStorage.getItem("user_type") === ProviderString && (<>
-
+                                    <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/provider/services'>Services</NavLink></li>
+                                    <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/provider/registered-services'>Registered Services</NavLink></li>
+                                    <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/provider/bookings'>Bookings</NavLink></li>
                                 </>)}
                                 <li className="nav-item active mr-sm-3"><NavLink className="nav-link text-dark" to='/' onClick={signOut}>Sign out of {localStorage.getItem("user_name")}</NavLink></li>
                             </>

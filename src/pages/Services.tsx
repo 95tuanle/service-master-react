@@ -4,7 +4,7 @@ import APIContext from "../context/APIContext";
 import {AdminString, CustomerString, ProviderString} from "../Utilities";
 import {useNavigate} from "react-router-dom";
 
-interface Service {
+export interface Service {
     service: {
         _id: string;
         name: string;
@@ -25,8 +25,17 @@ const Services = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(url + '/service', {
-                    headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
+                let response: any;
+                if (localStorage.getItem("user_type") === ProviderString) {
+                    response = await axios.get(url + '/service/provider', {
+                        headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
+                } else if (localStorage.getItem("user_type") === CustomerString) {
+                    response = await axios.get(url + '/service/customer', {
+                        headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
+                } else {
+                    response = await axios.get(url + '/service/', {
+                        headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
+                }
                 setServices(response.data);
                 setLoading(false);
                 console.log(response.data);
@@ -41,7 +50,7 @@ const Services = () => {
     const handleDelete = async (id: string) => {
         try {
             await axios.delete(`${url}/service/${id}`, {
-                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+                headers: { Authorization: `Bearer ${localStorage.getItem("token")}`}
             });
             const updatedServices = services.filter(service => service.service._id !== id);
             setServices(updatedServices);
@@ -50,11 +59,19 @@ const Services = () => {
             alert(JSON.stringify(error.response.data))
         }
     };
-    const handleBook = (service: Service): void => {
-        navigate(`/customer/book`, {state: {service: service}});
+    const handleBook = (service: Service) => {
+        navigate('/customer/book', {state: {service: service}});
     }
-    const handleRegister = (id: string): void => {
-
+    const handleRegister = async (id: string) => {
+        try {
+            await axios.put(`${url}/service/provider/${id}`, {}, {
+                headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}
+            });
+            navigate('/provider/registered-services');
+        } catch (error: any) {
+            console.error(error);
+            alert(JSON.stringify(error.response.data))
+        }
     }
 
     return (

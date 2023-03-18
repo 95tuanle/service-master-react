@@ -1,6 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import APIContext from "../context/APIContext";
 import axios from "axios";
+import {CustomerString, ProviderString} from "../Utilities";
 
 interface Booking {
     booking: any,
@@ -16,8 +17,14 @@ const Bookings = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(url + '/booking/customer', {
-                    headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
+                let response: any;
+                if (localStorage.getItem("user_type") === ProviderString) {
+                    response = await axios.get(url + '/booking/provider', {
+                        headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
+                } else if (localStorage.getItem("user_type") === CustomerString) {
+                    response = await axios.get(url + '/booking/customer', {
+                        headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
+                }
                 setBookings(response.data)
                 console.log(response.data);
             } catch (error: any) {

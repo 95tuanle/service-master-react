@@ -15,7 +15,6 @@ const Book = () => {
     const url = useContext(APIContext);
     const urgencyOptions = ["ASAP", "Anytime", "1 week"];
 
-
     const [inputs, setInputs] = useState({
         urgency: "",
         booking_description: "",
@@ -32,7 +31,6 @@ const Book = () => {
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
-        console.log(inputs)
         if (inputs.provider === "" || inputs.urgency === "" || inputs.booking_description === "" || inputs.booking_address === "" || inputs.booking_date === "") {
             alert("input must not be empty")
         } else {
@@ -43,7 +41,7 @@ const Book = () => {
                     booking_address: inputs.booking_address,
                     booking_date: inputs.booking_date,
                     provider: inputs.provider,
-                    service: service._id
+                    service: service.service._id
                 }, {headers: { Authorization: `Bearer ${localStorage.getItem("token")}`}});
                 console.log(response.data);
                 alert('Booked')
@@ -62,7 +60,7 @@ const Book = () => {
                     <div className='card registration-card m-sm-0 my-2'>
                         <div className='class-header btn-service-master-bg pt-3 pb-2'>
                             <div className='row text-center'>
-                                <h3 className='mb-4 fw-bold'>{service?.name}</h3>
+                                <h3 className='mb-4 fw-bold'>{service.service.name}</h3>
                             </div>
                         </div>
                         <div className='card-body px-sm-5 px-4'>

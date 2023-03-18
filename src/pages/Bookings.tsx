@@ -1,15 +1,17 @@
 import {useContext, useEffect, useState} from "react";
 import APIContext from "../context/APIContext";
-import {useNavigate} from "react-router-dom";
 import axios from "axios";
 
 interface Booking {
+    booking: any,
+    service: any,
+    customer: any,
+    provider: any
 }
 
 const Bookings = () => {
     const [bookings, setBookings] = useState<Booking[]>([]);
     const url = useContext(APIContext);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,24 +28,9 @@ const Bookings = () => {
         fetchData().then(() => {});
     }, [url]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                bookings.map(booking => {
-
-                })
-            } catch (error: any) {
-                console.error(error.response.data);
-                alert(JSON.stringify(error.response.data))
-            }
-        }
-        fetchData().then(() => {});
-    }, [url])
-
-
 
     const [inputs, setInputs] = useState({
-        booking_date: "",
+        booking_date: Date,
     });
 
     const handleChange = (event: any) => {
@@ -52,49 +39,66 @@ const Bookings = () => {
         setInputs(values => ({...values, [name]: value}))
     }
 
-    const handleSubmit = async (event: any) => {
-        event.preventDefault();
-        console.log(inputs)
-        if (inputs.booking_date === "") {
+    const handleReschedule = async (id: String) => {
+        if (inputs.booking_date === null) {
             alert("input must not be empty")
         } else {
             try {
-                const response = await axios.post(`${url}/booking`, {
+                const response = await axios.put(`${url}/booking/date/${id}`, {
                     booking_date: inputs.booking_date,
                 }, {headers: { Authorization: `Bearer ${localStorage.getItem("token")}`}});
                 console.log(response.data);
-                alert('Booked')
-                navigate('/customer/bookings');
+                const updatedBookings = bookings.map(booking => booking.booking._id === response.data._id ? ({...booking, booking: response.data}) : (booking) )
+                setBookings(updatedBookings)
+                console.log(bookings)
+                alert('Rescheduled')
             } catch (error: any) {
                 console.error(error.response.data);
                 alert(JSON.stringify(error.response.data))
             }
         }
     }
+
+    const handleDelete = async (id: String) => {
+        try {
+            await axios.delete(`${url}/booking/${id}`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
+            const updatedBookings = bookings.filter(booking => booking.booking._id !== id);
+            setBookings(updatedBookings);
+        } catch (error: any) {
+            console.error(error.response.data);
+            alert(JSON.stringify(error.response.data))
+        }
+    };
+
     return (
         <>
             {bookings.map(booking => (
-                <div className="card mb-4">
+                <div className="card mb-4" key={booking.booking._id}>
                     <div className="card-header bg-dark text-white">
-                        Service title
+                        {booking.service.name}
                     </div>
                     <div className="card-body">
-                        <h5 className="card-title mb-3">Service subtitle</h5>
-                        <p className="card-text mb-3">Booking description - Lorem ipsum dolor sit amet consectetur. Feugiat morbi enim etiam gravida non vitae. Est amet risus sagittis nisi nunc facilisi dapibus placerat sed. Vel eget bibendum nisl etiam. Suspendisse magna natoque adipiscing a fermentum amet vulputate elementum mi. Netus mi eget tortor amet vitae egestas. Dolor amet libero a sit vestibulum eget non duis nec.</p>
-                        <p><strong>Service address: </strong>100 Pantomine Boulevard, Brampton, Ontario, L6Y5N4</p>
-                        <p><strong>Date: </strong>2023-03-23</p>
-                        <p><strong>Provider: </strong>Provider name</p>
-                        <span className="btn btn-primary btn-service-master-bg text-dark mr-3" onClick={(e) => document.getElementById('date-field-container')?.classList.remove('d-none')}>Request reschedule</span>
-                        <a href="#" className="btn btn-danger text-white">Cancel booking</a>
-                        <div className={`form-group my-4 d-none`} id="date-field-container">
-                            <label htmlFor="date-field" className="mb-3 input-label">Suggested date</label>
+                        <p className="card-text mb-3">{booking.service.description}</p>
+                        <p><strong>Description: </strong>{booking.booking.booking_description}</p>
+                        <p><strong>Address: </strong>{booking.booking.booking_address}</p>
+                        <p><strong>Date: </strong>{new Date(booking.booking.booking_date).toLocaleString()}</p>
+                        <p><strong>Provider: </strong>{booking.provider}</p>
+                        <span className="btn btn-primary btn-service-master-bg text-dark mr-3" onClick={() => {
+                            document.getElementById('date-field-container' + booking.booking._id)?.classList.remove('d-none');
+                        }}>Reschedule</span>
+                        <span onClick={() => handleDelete(booking.booking._id)} className="btn btn-danger text-white">Cancel</span>
+                        <div className={`form-group my-4 d-none`} id={'date-field-container' + booking.booking._id}>
+                            <label htmlFor="date-field" className="mb-3 input-label">New date</label>
                             <input
                                 name="booking_date"
                                 type="datetime-local"
                                 className={`form-control input-field`}
                                 onChange={handleChange}
                                 id='date-field' />
-                            <span className='btn btn-primary btn-service-master-bg text-dark mt-3' onClick={(e) => document.getElementById('date-field-container')?.classList.add('d-none')}>Reschedule</span>
+                            <span className='btn btn-primary btn-service-master-bg text-dark mt-3' onClick={(e) => {
+                                document.getElementById('date-field-container' + booking.booking._id)?.classList.add('d-none');
+                                handleReschedule(booking.booking._id).then(() => {})
+                            }}>Reschedule</span>
                         </div>
                     </div>
                 </div>

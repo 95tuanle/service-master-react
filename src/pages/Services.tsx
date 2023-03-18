@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from 'react';
 import axios from 'axios';
 import APIContext from "../context/APIContext";
-import {AdminString, CustomerString} from "../Utilities";
+import {AdminString, CustomerString, ProviderString} from "../Utilities";
 import {useNavigate} from "react-router-dom";
 
 interface Service {
@@ -50,8 +50,11 @@ const Services = () => {
             alert(JSON.stringify(error.response.data))
         }
     };
-    const handleBookNow = (service: Service): void => {
+    const handleBook = (service: Service): void => {
         navigate(`/customer/book`, {state: {service: service}});
+    }
+    const handleRegister = (id: string): void => {
+
     }
 
     return (
@@ -71,10 +74,13 @@ const Services = () => {
                         <div className="card-body">
                             <p className="card-text mb-3">{service.service.description}</p>
                             {localStorage.getItem("user_type") === CustomerString && (
-                                <span className="btn btn-primary btn-service-master-bg text-dark" onClick={() => handleBookNow(service)}>Book now</span>
+                                <span className="btn btn-primary btn-service-master-bg text-dark" onClick={() => handleBook(service)}>Book</span>
                             )}
                             {localStorage.getItem("user_type") === AdminString && (
                                 <span className="btn btn-primary btn-service-master-bg text-dark" onClick={() => handleDelete(service.service._id)}>Delete</span>
+                            )}
+                            {localStorage.getItem("user_type") === ProviderString && (
+                                <span className="btn btn-primary btn-service-master-bg text-dark" onClick={() => handleRegister(service.service._id)}>Register</span>
                             )}
                         </div>
                     </div>

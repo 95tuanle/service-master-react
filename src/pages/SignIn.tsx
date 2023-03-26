@@ -2,7 +2,7 @@ import {useContext, useState} from "react";
 import APIContext from "../context/APIContext";
 import axios from "axios";
 import ServiceMasterLogo from '../assets/images/service-master-logo.png';
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
 const SignIn = () => {
     const url = useContext(APIContext);
@@ -84,7 +84,7 @@ const SignIn = () => {
 
                             <div className='row text-center'>
                                 <div className='col-12'>
-                                    <p className='generic-paragraph mb-4'>Don't have an account? <a href='/sign-up'>Sign Up</a></p>
+                                    <p className='generic-paragraph mb-4'>Don't have an account? <NavLink to='/sign-up'>Sign up</NavLink></p>
                                 </div>
                             </div>
                         </div>

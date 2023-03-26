@@ -2,7 +2,7 @@ import React, {useContext, useState} from "react";
 import axios from 'axios';
 import APIContext from "../context/APIContext";
 import ServiceMasterLogo from '../assets/images/service-master-logo.png';
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {AdminString, CustomerString, ProviderString} from "../Utilities";
 
 const SignUp = () => {
@@ -130,7 +130,7 @@ const SignUp = () => {
                             </div>
                             <div className='row text-center'>
                                 <div className='col-12'>
-                                    <p className='generic-paragraph mb-4'>Already have an account? <a href='/sign-in'>Sign in</a></p>
+                                    <p className='generic-paragraph mb-4'>Already have an account? <NavLink to='/sign-in'>Sign in</NavLink></p>
                                 </div>
                             </div>
                         </div>

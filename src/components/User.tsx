@@ -29,7 +29,7 @@ const User = ({user, setUsers}: Props) => {
 
     return (
         <>
-            {user._id} - {user.email} - {user.first_name} {user.last_name} - {user.type} <button onClick={()=>deleteUser(user._id)}>DELETE</button><NavLink to={'/update/' + user._id}>UPDATE</NavLink><br/>
+            {user._id} - {user.email} - {user.first_name} {user.last_name} - {user.type} <button onClick={()=>deleteUser(user._id)}>DELETE</button><NavLink to={'/admin/update-user/' + user._id}>UPDATE</NavLink><br/>
         </>
     )
 }

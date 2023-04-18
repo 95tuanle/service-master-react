@@ -89,7 +89,7 @@ const Bookings = () => {
                         <p><strong>Description: </strong>{booking.booking.booking_description}</p>
                         <p><strong>Address: </strong>{booking.booking.booking_address}</p>
                         <p><strong>Date: </strong>{new Date(booking.booking.booking_date).toLocaleString()}</p>
-                        <p><strong>Provider: </strong>{booking.provider}</p>
+                        <p><strong>{localStorage.getItem("user_type") === ProviderString ? "Customer" : "Provider"}: </strong>{booking.provider}</p>
                         <span className="btn btn-primary btn-service-master-bg text-dark mr-3" onClick={() => {
                             document.getElementById('date-field-container' + booking.booking._id)?.classList.remove('d-none');
                         }}>Reschedule</span>

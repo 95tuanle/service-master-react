@@ -77,8 +77,8 @@ const AddService = () => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <form onSubmit={handleSubmit} className="mb-5">
+                <div className="form-group">
                     <label htmlFor="name-input">Name</label>
                     <input
                         type="text"
@@ -86,9 +86,10 @@ const AddService = () => {
                         placeholder="Enter Service Name"
                         value={name}
                         onChange={handleNameChange}
+                        className="form-control"
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="description-input">Description</label>
                     <input
                         type="text"
@@ -96,9 +97,10 @@ const AddService = () => {
                         placeholder="Enter Service Description"
                         value={description}
                         onChange={handleDescriptionChange}
+                        className="form-control"
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="providers-input">Providers</label>
                     <input
                         type="text"
@@ -106,6 +108,7 @@ const AddService = () => {
                         placeholder="Enter comma separated provider IDs"
                         value={providers}
                         onChange={handleProvidersChange}
+                        className="form-control"
                     />
                 </div>
                 <div>
@@ -115,8 +118,8 @@ const AddService = () => {
             <div>
                 <div>
                     <div>
-                        <table>
-                            <thead>
+                        <table className='table table-striped'>
+                            <thead className='bg-dark text-white'>
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
@@ -133,7 +136,7 @@ const AddService = () => {
                                     <td>{service.service.description}</td>
                                     <td>{service.providers.map(provider => (provider.name))}</td>
                                     <td>
-                                        <button onClick={() => handleDelete(service.service._id)}>Delete</button>
+                                        <button onClick={() => handleDelete(service.service._id)} className="btn btn-danger">Delete</button>
                                     </td>
                                 </tr>
                             ))}

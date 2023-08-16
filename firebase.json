@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "service-master-react",
+    "site": "service-master-react-fe",
     "public": "build",
     "ignore": [
       "firebase.json",

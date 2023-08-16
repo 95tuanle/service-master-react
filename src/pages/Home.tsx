@@ -5,7 +5,7 @@ const Home = () => {
         <>
             <div className="jumbotron jumbotron-fluid text-center bg-light">
                 <div className="container">
-                    <h1 className="display-4">HELLOWelcome to Service Master</h1>
+                    <h1 className="display-4">Welcome to Service Master</h1>
                     <p className="lead">Your one-stop solution for home renovation services</p>
                     <a href="#services" className="btn btn-outline-dark btn-lg">Explore Our Services</a>
                 </div>

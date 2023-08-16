@@ -22,7 +22,6 @@ import Services from "./pages/Services";
 import RegisteredServices from "./pages/RegisteredServices";
 import Users from "./pages/Users";
 
-
 export interface UserType {
     _id: any;
     first_name: any;

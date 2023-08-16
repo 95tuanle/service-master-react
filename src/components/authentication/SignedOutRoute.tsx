@@ -4,6 +4,6 @@ const SignedOutRoute = () => {
     if (localStorage.getItem("token")) {
         return <Navigate to='/' replace/>;
     }
-    return <Outlet />;
+    return <Outlet/>;
 };
 export default SignedOutRoute;

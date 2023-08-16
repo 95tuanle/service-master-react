@@ -5,6 +5,6 @@ const CustomerRoute = () => {
     if (localStorage.getItem("user_type") !== CustomerString) {
         return <Navigate to='/' replace/>;
     }
-    return <Outlet />;
+    return <Outlet/>;
 };
 export default CustomerRoute;

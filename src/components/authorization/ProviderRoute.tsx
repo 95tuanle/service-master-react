@@ -5,6 +5,6 @@ const ProviderRoute = () => {
     if (localStorage.getItem("user_type") !== ProviderString) {
         return <Navigate to='/' replace/>;
     }
-    return <Outlet />;
+    return <Outlet/>;
 };
 export default ProviderRoute;

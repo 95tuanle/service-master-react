@@ -46,11 +46,17 @@ const Home = () => {
                     <div className="row">
                         <div className="col-md-6">
                             <h2>Easy Booking</h2>
-                            <p>Our seamless booking process allows you to quickly and easily schedule a service appointment at a time that works best for you. Simply select the service you need, choose a date and time, and sit back and relax while Service Master takes care of the rest. You can also track the status of your service appointment and receive real-time updates on the progress of your renovation.</p>
+                            <p>Our seamless booking process allows you to quickly and easily schedule a service
+                                appointment at a time that works best for you. Simply select the service you need,
+                                choose a date and time, and sit back and relax while Service Master takes care of the
+                                rest. You can also track the status of your service appointment and receive real-time
+                                updates on the progress of your renovation.</p>
                         </div>
                         <div className="col-md-6">
                             <h2>Transparent Pricing</h2>
-                            <p>Service Master offers competitive pricing, with transparent and upfront quotes for all services. You can trust that you're getting the best value for your money, without any hidden fees or surprises.</p>
+                            <p>Service Master offers competitive pricing, with transparent and upfront quotes for all
+                                services. You can trust that you're getting the best value for your money, without any
+                                hidden fees or surprises.</p>
                         </div>
                     </div>
                 </div>
@@ -61,20 +67,26 @@ const Home = () => {
                     <div className="row">
                         <div className="col-md-6 order-md-2">
                             <h2>Professional & Reliable Services</h2>
-                            <p>With Service Master, you can rest assured that your home renovation project is in good hands. Our team of skilled professionals is dedicated to providing high-quality, efficient, and reliable services to meet all of your renovation needs.</p>
+                            <p>With Service Master, you can rest assured that your home renovation project is in good
+                                hands. Our team of skilled professionals is dedicated to providing high-quality,
+                                efficient, and reliable services to meet all of your renovation needs.</p>
                         </div>
                         <div className="col-md-6 order-md-1">
                             <h2>Customer Satisfaction</h2>
-                            <p>Our top priority is customer satisfaction. We work closely with you to understand your requirements and ensure that every aspect of your renovation project exceeds your expectations. Try Service Master today and see the difference for yourself.</p>
+                            <p>Our top priority is customer satisfaction. We work closely with you to understand your
+                                requirements and ensure that every aspect of your renovation project exceeds your
+                                expectations. Try Service Master today and see the difference for yourself.</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="container-fluid text-center py-5">
                 <h2 className="mb-4">Ready to Transform Your Home?</h2>
-                <p className="lead">Book a service appointment with Service Master and let our experts take care of your home renovation needs.</p>
+                <p className="lead">Book a service appointment with Service Master and let our experts take care of your
+                    home renovation needs.</p>
             </div>
         </>
-    )}
+    )
+}
 export default Home;
 

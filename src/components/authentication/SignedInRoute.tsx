@@ -4,6 +4,6 @@ const SignedInRoute = () => {
     if (!localStorage.getItem("token")) {
         return <Navigate to='sign-in' replace/>;
     }
-    return <Outlet />;
+    return <Outlet/>;
 };
 export default SignedInRoute;

@@ -55,7 +55,7 @@ const SignUp = () => {
                         <div className='card-body px-sm-5 px-4'>
                             <div className='row text-center'>
                                 <div className='col-12'>
-                                    <img src={ServiceMasterLogo} alt="my-little-tribe-logo" className='mt-3 mb-2 w-50' />
+                                    <img src={ServiceMasterLogo} alt="my-little-tribe-logo" className='mt-3 mb-2 w-50'/>
                                 </div>
                             </div>
                             <div className='row text-center'>
@@ -67,14 +67,15 @@ const SignUp = () => {
                             <div className='row'>
                                 <div className='col-12'>
                                     <div className={`form-group mb-4`}>
-                                        <label htmlFor="first-name-field" className="mb-3 input-label">First name</label>
+                                        <label htmlFor="first-name-field" className="mb-3 input-label">First
+                                            name</label>
                                         <input
                                             name="firstName"
                                             type="text"
                                             className={`form-control input-field`}
                                             onChange={handleChange}
                                             value={inputs.firstName}
-                                            id='first-name-field' />
+                                            id='first-name-field'/>
                                     </div>
                                     <div className={`form-group mb-4`}>
                                         <label htmlFor="last-name-field" className="mb-3 input-label">Last name</label>
@@ -84,7 +85,7 @@ const SignUp = () => {
                                             className={`form-control input-field`}
                                             onChange={handleChange}
                                             value={inputs.lastName}
-                                            id='last-name-field' />
+                                            id='last-name-field'/>
                                     </div>
                                     <div className={`form-group mb-4`}>
                                         <label htmlFor="email-field" className="mb-3 input-label">Email</label>
@@ -94,7 +95,7 @@ const SignUp = () => {
                                             className={`form-control input-field`}
                                             onChange={handleChange}
                                             value={inputs.email}
-                                            id='email-field' />
+                                            id='email-field'/>
                                     </div>
                                     <div className={`form-group mb-4`}>
                                         <label htmlFor="password-field" className="mb-3 input-label">Password</label>
@@ -104,7 +105,7 @@ const SignUp = () => {
                                             className={`form-control input-field`}
                                             onChange={handleChange}
                                             value={inputs.password}
-                                            id='password-field' />
+                                            id='password-field'/>
                                     </div>
                                     <div className={`form-group mb-4`}>
                                         <label htmlFor="type-field" className="mb-3 input-label-dd">Type</label>
@@ -114,7 +115,7 @@ const SignUp = () => {
                                                 value={inputs.type}
                                                 className={`form-control input-field-dd`}
                                                 id="type-field"
-                                                onChange={handleChange} >
+                                                onChange={handleChange}>
                                                 <option value="" className='option-disabled'>Select</option>
                                                 {userTypes.map((options, index) => {
                                                     return (
@@ -130,7 +131,8 @@ const SignUp = () => {
                             </div>
                             <div className='row text-center'>
                                 <div className='col-12'>
-                                    <p className='generic-paragraph mb-4'>Already have an account? <NavLink to='/sign-in'>Sign in</NavLink></p>
+                                    <p className='generic-paragraph mb-4'>Already have an account? <NavLink
+                                        to='/sign-in'>Sign in</NavLink></p>
                                 </div>
                             </div>
                         </div>

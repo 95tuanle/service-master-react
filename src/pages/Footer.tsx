@@ -1,4 +1,3 @@
-
 const Footer = () => {
     return (
         <footer className="text-center text-lg-start  footer-bg">
@@ -10,10 +9,11 @@ const Footer = () => {
                                 Service Master
                             </h6>
                             <p>
-                                Service Master is a web application that allows users to find and book services from local service providers.
+                                Service Master is a web application that allows users to find and book services from
+                                local service providers.
                             </p>
                         </div>
-                        <hr className="w-100 clearfix d-md-none" />
+                        <hr className="w-100 clearfix d-md-none"/>
                         <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                             <h6 className="text-uppercase mb-4 font-weight-bold">Contact</h6>
                             <p><i className="fas fa-home mr-3"></i>1205 Humber College Blvd, Toronto, ON M9W 5L7</p>
@@ -23,7 +23,7 @@ const Footer = () => {
                     </div>
                 </section>
 
-                <hr className="my-3" />
+                <hr className="my-3"/>
                 <section className="p-3 pt-0">
                     <div className="row d-flex align-items-center">
                         <div className="col-md-7 col-lg-8 text-center text-md-start">

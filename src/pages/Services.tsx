@@ -10,7 +10,8 @@ export interface Service {
         name: string;
         description: string;
         providers: string[];
-    }, providers: [{
+    },
+    providers: [{
         _id: string
         name: string
     }]
@@ -28,13 +29,16 @@ const Services = () => {
                 let response: any;
                 if (localStorage.getItem("user_type") === ProviderString) {
                     response = await axios.get(url + '/service/provider', {
-                        headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
+                        headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}
+                    });
                 } else if (localStorage.getItem("user_type") === CustomerString) {
                     response = await axios.get(url + '/service/customer', {
-                        headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
+                        headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}
+                    });
                 } else {
                     response = await axios.get(url + '/service/', {
-                        headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
+                        headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}
+                    });
                 }
                 setServices(response.data);
                 setLoading(false);
@@ -44,13 +48,14 @@ const Services = () => {
                 alert(JSON.stringify(error.response.data))
             }
         };
-        fetchData().then(() => {});
+        fetchData().then(() => {
+        });
     }, [url]);
 
     const handleDelete = async (id: string) => {
         try {
             await axios.delete(`${url}/service/${id}`, {
-                headers: { Authorization: `Bearer ${localStorage.getItem("token")}`}
+                headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}
             });
             const updatedServices = services.filter(service => service.service._id !== id);
             setServices(updatedServices);
@@ -77,7 +82,7 @@ const Services = () => {
     return (
         <>
             {loading ? (
-                <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+                <div className="d-flex justify-content-center align-items-center" style={{height: '100vh'}}>
                     <div className="spinner-border" role="status">
                         <span className="visually-hidden">Loading...</span>
                     </div>
@@ -91,13 +96,16 @@ const Services = () => {
                         <div className="card-body">
                             <p className="card-text mb-3">{service.service.description}</p>
                             {localStorage.getItem("user_type") === CustomerString && (
-                                <span className="btn btn-primary btn-service-master-bg text-dark" onClick={() => handleBook(service)}>Book</span>
+                                <span className="btn btn-primary btn-service-master-bg text-dark"
+                                      onClick={() => handleBook(service)}>Book</span>
                             )}
                             {localStorage.getItem("user_type") === AdminString && (
-                                <span className="btn btn-primary btn-service-master-bg text-dark" onClick={() => handleDelete(service.service._id)}>Delete</span>
+                                <span className="btn btn-primary btn-service-master-bg text-dark"
+                                      onClick={() => handleDelete(service.service._id)}>Delete</span>
                             )}
                             {localStorage.getItem("user_type") === ProviderString && (
-                                <span className="btn btn-primary btn-service-master-bg text-dark" onClick={() => handleRegister(service.service._id)}>Register</span>
+                                <span className="btn btn-primary btn-service-master-bg text-dark"
+                                      onClick={() => handleRegister(service.service._id)}>Register</span>
                             )}
                         </div>
                     </div>

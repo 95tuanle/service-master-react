@@ -47,20 +47,21 @@ function App() {
                     </Route>
                     <Route element={<SignedInRoute/>}>
                         <Route element={<AdminRoute/>}>
-                            <Route path='admin/users' element={<Users setUsers={setUsers} users={users}/>} />
-                            <Route path='admin/update-user/:_id' element={<UpdateUser setUsers={setUsers} users={users}/>} />
+                            <Route path='admin/users' element={<Users setUsers={setUsers} users={users}/>}/>
+                            <Route path='admin/update-user/:_id'
+                                   element={<UpdateUser setUsers={setUsers} users={users}/>}/>
                             <Route path='admin/add-service' element={<AddService/>}/>
-                            <Route path='admin/services' element={<Services/>} />
+                            <Route path='admin/services' element={<Services/>}/>
                         </Route>
                         <Route element={<CustomerRoute/>}>
-                            <Route path='customer/services' element={<Services/>} />
-                            <Route path='customer/bookings' element={<Bookings/>} />
-                            <Route path='customer/book' element={<Book />} />
+                            <Route path='customer/services' element={<Services/>}/>
+                            <Route path='customer/bookings' element={<Bookings/>}/>
+                            <Route path='customer/book' element={<Book/>}/>
                         </Route>
                         <Route element={<ProviderRoute/>}>
-                            <Route path='provider/services' element={<Services/>} />
-                            <Route path='provider/registered-services' element={<RegisteredServices/>} />
-                            <Route path='provider/bookings' element={<Bookings/>} />
+                            <Route path='provider/services' element={<Services/>}/>
+                            <Route path='provider/registered-services' element={<RegisteredServices/>}/>
+                            <Route path='provider/bookings' element={<Bookings/>}/>
                         </Route>
                     </Route>
                     <Route path='*' element={<h1>Oops! Route not found</h1>}/>

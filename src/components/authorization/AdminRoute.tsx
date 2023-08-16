@@ -5,6 +5,6 @@ const AdminRoute = () => {
     if (localStorage.getItem("user_type") !== AdminString) {
         return <Navigate to='/' replace/>;
     }
-    return <Outlet />;
+    return <Outlet/>;
 };
 export default AdminRoute;

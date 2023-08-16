@@ -32,7 +32,7 @@ const AddService = () => {
                     name,
                     description
                 };
-            } else{
+            } else {
                 data = {
                     name,
                     description,
@@ -61,8 +61,9 @@ const AddService = () => {
                 alert(JSON.stringify(error.response.data))
             }
         };
-        fetchData().then(() => {});
-    },[handleSubmit, url]);
+        fetchData().then(() => {
+        });
+    }, [handleSubmit, url]);
 
     const handleDelete = async (id: string) => {
         try {
@@ -112,7 +113,7 @@ const AddService = () => {
                     />
                 </div>
                 <div>
-                    <input type="submit" value="Add Service" />
+                    <input type="submit" value="Add Service"/>
                 </div>
             </form>
             <div>
@@ -136,7 +137,9 @@ const AddService = () => {
                                     <td>{service.service.description}</td>
                                     <td>{service.providers.map(provider => (provider.name))}</td>
                                     <td>
-                                        <button onClick={() => handleDelete(service.service._id)} className="btn btn-danger">Delete</button>
+                                        <button onClick={() => handleDelete(service.service._id)}
+                                                className="btn btn-danger">Delete
+                                        </button>
                                     </td>
                                 </tr>
                             ))}

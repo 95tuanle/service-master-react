@@ -42,7 +42,7 @@ const Book = () => {
                     booking_date: inputs.booking_date,
                     provider: inputs.provider,
                     service: service.service._id
-                }, {headers: { Authorization: `Bearer ${localStorage.getItem("token")}`}});
+                }, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}});
                 console.log(response.data);
                 alert('Booked')
                 navigate('/customer/bookings');
@@ -73,7 +73,7 @@ const Book = () => {
                                                 name="urgency"
                                                 className={`form-control input-field-dd`}
                                                 id="urgency-field"
-                                                onChange={handleChange} >
+                                                onChange={handleChange}>
                                                 <option value="" className='option-disabled'>Select</option>
                                                 {urgencyOptions.map((options, index) => {
                                                     return (
@@ -84,12 +84,13 @@ const Book = () => {
                                         </div>
                                     </div>
                                     <div className={`form-group mb-4`}>
-                                        <label htmlFor="description-field" className="mb-3 input-label">Description</label>
+                                        <label htmlFor="description-field"
+                                               className="mb-3 input-label">Description</label>
                                         <textarea
                                             name="booking_description"
                                             className={`form-control input-field`}
                                             onChange={handleChange}
-                                            id='description-field' />
+                                            id='description-field'/>
                                     </div>
                                     <div className={`form-group mb-4`}>
                                         <label htmlFor="address-field" className="mb-3 input-label">Address</label>
@@ -98,7 +99,7 @@ const Book = () => {
                                             type="text"
                                             className={`form-control input-field`}
                                             onChange={handleChange}
-                                            id='address-field' />
+                                            id='address-field'/>
                                     </div>
                                     <div className={`form-group mb-4`}>
                                         <label htmlFor="date-field" className="mb-3 input-label">Date</label>
@@ -107,7 +108,7 @@ const Book = () => {
                                             type="datetime-local"
                                             className={`form-control input-field`}
                                             onChange={handleChange}
-                                            id='date-field' />
+                                            id='date-field'/>
                                     </div>
                                     <div className={`form-group mb-4`}>
                                         <label htmlFor="provider-field" className="mb-3 input-label-dd">Provider</label>
@@ -116,12 +117,14 @@ const Book = () => {
                                                 name="provider"
                                                 className={`form-control input-field-dd`}
                                                 id="provider-field"
-                                                onChange={handleChange} >
+                                                onChange={handleChange}>
                                                 <option value="" className='option-disabled'>Select</option>
-                                                {service.providers.map((provider:Provider) => {
+                                                {service.providers.map((provider: Provider) => {
                                                     return (
-                                                        <option value={provider._id} key={provider._id}>{provider.name}</option>
-                                                    )})
+                                                        <option value={provider._id}
+                                                                key={provider._id}>{provider.name}</option>
+                                                    )
+                                                })
                                                 }
                                             </select>
                                         </div>

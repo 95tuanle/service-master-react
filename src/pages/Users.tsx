@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import {useContext, useEffect} from "react";
 import APIContext from "../context/APIContext";
 import axios from "axios";
 import User from "../components/User";
@@ -8,11 +8,11 @@ interface Props {
     setUsers: (users: any) => void
 }
 
-const Users = ({ users, setUsers }: Props) => {
+const Users = ({users, setUsers}: Props) => {
     const url = useContext(APIContext);
 
     useEffect(() => {
-        axios.get(`${url}/user`, { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }).then(response => {
+        axios.get(`${url}/user`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}}).then(response => {
             setUsers(response.data);
             console.log(response.data);
         }).catch(error => {
@@ -25,20 +25,20 @@ const Users = ({ users, setUsers }: Props) => {
         <>
             <table className="table table-striped">
                 <thead className="bg-dark text-white">
-                    <tr>
-                        <th>ID</th>
-                        <th>Email</th>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Type</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Type</th>
+                    <th></th>
+                    <th></th>
+                </tr>
                 </thead>
                 <tbody>
-                    {users.map(user => (
-                        <User user={user} setUsers={setUsers} key={user._id} />
-                    ))}
+                {users.map(user => (
+                    <User user={user} setUsers={setUsers} key={user._id}/>
+                ))}
                 </tbody>
             </table>
         </>

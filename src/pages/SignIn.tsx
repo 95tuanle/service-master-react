@@ -25,7 +25,7 @@ const SignIn = () => {
             alert("input must not be empty")
         } else {
             try {
-                const response = await axios.post(url+'/authentication', {
+                const response = await axios.post(url + '/authentication', {
                     'email': inputs.email,
                     'password': inputs.password,
                 });
@@ -50,7 +50,7 @@ const SignIn = () => {
                         <div className='card-body px-sm-5 px-4'>
                             <div className='row text-center'>
                                 <div className='col-12'>
-                                    <img src={ServiceMasterLogo} alt="my-little-tribe-logo" className='mt-3 mb-2 w-50' />
+                                    <img src={ServiceMasterLogo} alt="my-little-tribe-logo" className='mt-3 mb-2 w-50'/>
                                 </div>
                             </div>
                             <div className='row text-center'>
@@ -67,7 +67,7 @@ const SignIn = () => {
                                             name="email" type="email" value={inputs.email}
                                             className={`form-control input-field`}
                                             onChange={handleChange}
-                                            id='email-field' />
+                                            id='email-field'/>
                                     </div>
                                     <div className={`form-group mb-4`}>
                                         <label htmlFor="password-field" className="mb-3 input-label">Password</label>
@@ -75,7 +75,7 @@ const SignIn = () => {
                                             name="password" type="password" value={inputs.password}
                                             className={`form-control input-field`}
                                             onChange={handleChange}
-                                            id='password-field' />
+                                            id='password-field'/>
                                     </div>
                                     <span className="btn btn-primary col-12 mt-2 mb-4 btn-service-master-bg text-dark"
                                           onClick={handleSubmit}>Sign In</span>
@@ -84,7 +84,8 @@ const SignIn = () => {
 
                             <div className='row text-center'>
                                 <div className='col-12'>
-                                    <p className='generic-paragraph mb-4'>Don't have an account? <NavLink to='/sign-up'>Sign up</NavLink></p>
+                                    <p className='generic-paragraph mb-4'>Don't have an account? <NavLink to='/sign-up'>Sign
+                                        up</NavLink></p>
                                 </div>
                             </div>
                         </div>

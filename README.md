@@ -4,7 +4,7 @@ Service Master is a user-friendly application that allows homeowners to easily b
 Service Master, customers can easily find and book services for their home renovation needs. The application has been
 developed using React, and it provides a responsive and intuitive interface for a seamless user experience.
 
-[React front-end](https://service-master-react.web.app/)
+[React front-end](https://service-master-react-fe.web.app/)
 
 [Express back-end](https://service-master-api.cyclic.app)
 

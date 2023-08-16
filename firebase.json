@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "public": "build",
+    "site": "service-master-react-fe",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

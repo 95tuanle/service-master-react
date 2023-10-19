@@ -23,53 +23,53 @@ import RegisteredServices from "./pages/RegisteredServices";
 import Users from "./pages/Users";
 
 export interface UserType {
-    _id: any;
-    first_name: any;
-    last_name: any;
-    password: any;
-    email: any;
-    type: any;
+  _id: any;
+  first_name: any;
+  last_name: any;
+  password: any;
+  email: any;
+  type: any;
 }
 
 function App() {
-    const [users, setUsers] = useState<UserType[]>([]);
-    const url = useContext(APIContext);
+  const [users, setUsers] = useState<UserType[]>([]);
+  const url = useContext(APIContext);
 
-    return (
-        <APIContext.Provider value={url}>
-            <Navigation/>
-            <div className='container'>
-                <Routes>
-                    <Route path='/' element={<Home/>}/>
-                    <Route element={<SignedOutRoute/>}>
-                        <Route path='sign-up' element={<SignUp/>}/>
-                        <Route path='sign-in' element={<SignIn/>}/>
-                    </Route>
-                    <Route element={<SignedInRoute/>}>
-                        <Route element={<AdminRoute/>}>
-                            <Route path='admin/users' element={<Users setUsers={setUsers} users={users}/>}/>
-                            <Route path='admin/update-user/:_id'
-                                   element={<UpdateUser setUsers={setUsers} users={users}/>}/>
-                            <Route path='admin/add-service' element={<AddService/>}/>
-                            <Route path='admin/services' element={<Services/>}/>
-                        </Route>
-                        <Route element={<CustomerRoute/>}>
-                            <Route path='customer/services' element={<Services/>}/>
-                            <Route path='customer/bookings' element={<Bookings/>}/>
-                            <Route path='customer/book' element={<Book/>}/>
-                        </Route>
-                        <Route element={<ProviderRoute/>}>
-                            <Route path='provider/services' element={<Services/>}/>
-                            <Route path='provider/registered-services' element={<RegisteredServices/>}/>
-                            <Route path='provider/bookings' element={<Bookings/>}/>
-                        </Route>
-                    </Route>
-                    <Route path='*' element={<h1>Oops! Route not found</h1>}/>
-                </Routes>
-            </div>
-            <Footer/>
-        </APIContext.Provider>
-    );
+  return (
+    <APIContext.Provider value={url}>
+      <Navigation/>
+      <div className='container'>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route element={<SignedOutRoute/>}>
+            <Route path='sign-up' element={<SignUp/>}/>
+            <Route path='sign-in' element={<SignIn/>}/>
+          </Route>
+          <Route element={<SignedInRoute/>}>
+            <Route element={<AdminRoute/>}>
+              <Route path='admin/users' element={<Users setUsers={setUsers} users={users}/>}/>
+              <Route path='admin/update-user/:_id'
+                     element={<UpdateUser setUsers={setUsers} users={users}/>}/>
+              <Route path='admin/add-service' element={<AddService/>}/>
+              <Route path='admin/services' element={<Services/>}/>
+            </Route>
+            <Route element={<CustomerRoute/>}>
+              <Route path='customer/services' element={<Services/>}/>
+              <Route path='customer/bookings' element={<Bookings/>}/>
+              <Route path='customer/book' element={<Book/>}/>
+            </Route>
+            <Route element={<ProviderRoute/>}>
+              <Route path='provider/services' element={<Services/>}/>
+              <Route path='provider/registered-services' element={<RegisteredServices/>}/>
+              <Route path='provider/bookings' element={<Bookings/>}/>
+            </Route>
+          </Route>
+          <Route path='*' element={<h1>Oops! Route not found</h1>}/>
+        </Routes>
+      </div>
+      <Footer/>
+    </APIContext.Provider>
+  );
 }
 
 export default App;

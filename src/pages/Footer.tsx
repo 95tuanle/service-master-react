@@ -28,9 +28,7 @@ const Footer = () => {
           <div className="row d-flex align-items-center">
             <div className="col-md-7 col-lg-8 text-center text-md-start">
               <div className="p-3">
-                Swapnil Roy Chowdhury - N01469281
-                | Nguyen Anh Tuan Le - N01414195
-                | Mihir Deshpande - N01471808
+                <p className="mb-0">© 2023 Service Master</p>
               </div>
             </div>
           </div>

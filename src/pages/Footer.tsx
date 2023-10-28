@@ -28,7 +28,7 @@ const Footer = () => {
           <div className="row d-flex align-items-center">
             <div className="col-md-7 col-lg-8 text-center text-md-start">
               <div className="p-3">
-                <p className="mb-0">© 2023 Service Master</p>
+                <p className="mb-0">© {new Date().getFullYear()} Service Master</p>
               </div>
             </div>
           </div>

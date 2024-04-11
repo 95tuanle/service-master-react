@@ -15,7 +15,7 @@ const Navigation = () => {
     <header className='mb-5'>
       <nav className="navbar navbar-expand-lg navbar-dark header-bg scrolling-navbar py-2">
         <NavLink className="navbar-brand text-dark " to='/'>
-          <img src={ServiceMasterLogo} alt="my-little-tribe-logo" className='w-75'/>
+          <img src={ServiceMasterLogo} alt="service-master-logo" className='w-75'/>
         </NavLink>
         <button className="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent"

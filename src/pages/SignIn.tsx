@@ -50,7 +50,7 @@ const SignIn = () => {
             <div className='card-body px-sm-5 px-4'>
               <div className='row text-center'>
                 <div className='col-12'>
-                  <img src={ServiceMasterLogo} alt="my-little-tribe-logo" className='mt-3 mb-2 w-50'/>
+                  <img src={ServiceMasterLogo} alt="service-master-logo" className='mt-3 mb-2 w-50'/>
                 </div>
               </div>
               <div className='row text-center'>

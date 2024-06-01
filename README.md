@@ -6,7 +6,7 @@ developed using React, and it provides a responsive and intuitive interface for 
 
 [React front-end](https://service-master-react-fe.web.app/)
 
-[Express back-end](https://service-master-api.cyclic.app)
+[Express back-end](https://service-master-be.onrender.com)
 
 ## Features
 
